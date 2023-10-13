@@ -1,4 +1,4 @@
-# Vite in React # Vit + Recat
+# Vite in React # Vite + Recat
 Vite is a build tool and development server for modern web development. It is designed to streamline the development process, improve the development experience, and offer excellent performance. When used in conjunction with React, Vite can provide a highly productive environment for building web applications.
 
 Key Features
