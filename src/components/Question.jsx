@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 
 const Options = ({ options, answer, correctOption, dispatch, onNext }) => {
   const handleOptionClick = (index) => {
     if (answer === null) {
       dispatch({ type: "pick-option", payload: index });
+
+      if (index === correctOption) {
+      
+        setIndexx(index)
+      }
       if(index!==correctOption){
         let timerInterval
-Swal.fire({
+  Swal.fire({
   title: 'Auto close alert!',
   html: 'I will close in <b></b> milliseconds.',
   timer: 1000,
@@ -22,24 +27,35 @@ Swal.fire({
   willClose: () => {
     clearInterval(timerInterval)
   }
-}).then((result) => {
+  }).then((result) => {
   
   if (result.dismiss === Swal.DismissReason.timer) {
     window.location.reload()
   }
-})
+  })
       }
-
-      if (index === correctOption) {
-        
-        onNext();
-      }
+      
     }
   };
 
+  const [indexx,setIndexx] = useState()
+
+  const nextQuestion =()=>{
+   
+
+    if (indexx === correctOption) {
+      
+      onNext();
+      setIndexx()
+    }
+  }
+
   return (
-    <>
-      {options.map((option, index) => (
+    <div className='container'>
+      {options.map((option, index) => {
+       
+        
+        return(
         <button
           className={`
                     btn btn-option 
@@ -58,8 +74,9 @@ Swal.fire({
         >
           {option}
         </button>
-      ))}
-    </>
+      )})}
+      {indexx>=0&&<button onClick={()=>nextQuestion()} className='nextButton' >Next Question</button>}
+    </div>
   );
 }
 
